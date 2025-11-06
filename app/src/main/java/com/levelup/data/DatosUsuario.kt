@@ -14,6 +14,8 @@ object Keys {
     val EMAIL_USUARIO = stringPreferencesKey("email_usuario")
     val DIRECCION_USUARIO = stringPreferencesKey("direccion_usuario")
     val CARRITO_IDS = stringPreferencesKey("carrito_ids")
+
+    val ORDENES = stringPreferencesKey("ordenes_csv")
 }
 
 class DatosUsuario(private val context: Context) {
@@ -22,6 +24,8 @@ class DatosUsuario(private val context: Context) {
     val emailUsuario: Flow<String> = context.dataStore.data.map { it[Keys.EMAIL_USUARIO] ?: "" }
     val direccionUsuario: Flow<String> = context.dataStore.data.map { it[Keys.DIRECCION_USUARIO] ?: "" }
     val carritoIds: Flow<String> = context.dataStore.data.map { it[Keys.CARRITO_IDS] ?: "" }
+
+    val ordenesCsv: Flow<String> = context.dataStore.data.map { it[Keys.ORDENES] ?: "" }
 
     suspend fun guardarUsuario(nombreUsuario: String, emailUsuario: String, direccionUsuario: String = "") {
         context.dataStore.edit {
@@ -33,5 +37,12 @@ class DatosUsuario(private val context: Context) {
 
     suspend fun guardarCarrito(idsCsv: String) {
         context.dataStore.edit { it[Keys.CARRITO_IDS] = idsCsv }
+    }
+    suspend fun agregarOrden(linea: String) {
+        context.dataStore.edit { prefs ->
+            val actual = prefs[Keys.ORDENES] ?: ""
+            val nuevo = if (actual.isBlank()) linea else "$actual||$linea"
+            prefs[Keys.ORDENES] = nuevo
+        }
     }
 }

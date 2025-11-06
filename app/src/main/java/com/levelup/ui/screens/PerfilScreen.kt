@@ -5,6 +5,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -14,6 +15,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.levelup.ui.viewmodel.AppViewModel
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.foundation.verticalScroll
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(onBack: () -> Unit) {
@@ -37,11 +40,25 @@ fun ProfileScreen(onBack: () -> Unit) {
             navigationIcon = { IconButton(onClick = onBack){ Icon(Icons.Default.ArrowBack, "Volver") } }
         )
     }) { inner ->
-        Column(Modifier.padding(inner).padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            photo?.let { Image(it.asImageBitmap(),
-                contentDescription = null,
-                modifier = Modifier.size(120.dp)) }
+        val scrollState = rememberScrollState()
+
+        Column(
+            Modifier
+                .padding(inner)
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .imePadding()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // --- FOTO DE PERFIL ---
+            photo?.let {
+                Image(
+                    it.asImageBitmap(),
+                    contentDescription = null,
+                    modifier = Modifier.size(120.dp)
+                )
+            }
             Button(onClick = { cameraLauncher.launch(null) }) { Text("Tomar foto") }
 
             OutlinedTextField(
@@ -65,6 +82,37 @@ fun ProfileScreen(onBack: () -> Unit) {
             Text(
                 "Guardado: $nombreUsuario • $emailUsuario • $editarDireccion",
                 style = MaterialTheme.typography.bodyMedium)
+
+            HistorialDeCompras(vm)
+        }
+    }
+}
+@Composable
+fun HistorialDeCompras(vm: AppViewModel = viewModel()) {
+    val csv by vm.ordenesCsv.collectAsState()
+    val ordenes = remember(csv) {
+        if (csv.isBlank()) emptyList()
+        else csv.split("||").filter { it.isNotBlank() }
+    }
+
+    Spacer(Modifier.height(16.dp))
+    Text("Historial de compras", style = MaterialTheme.typography.titleLarge)
+
+    if (ordenes.isEmpty()) {
+        Text("Sin compras registradas aún.")
+    } else {
+        ordenes.forEach { linea ->
+
+            val partes = linea.split(";")
+            val fechaMs = partes.getOrNull(0)?.toLongOrNull() ?: 0L
+            val cant = partes.getOrNull(1) ?: "0"
+            val sub = partes.getOrNull(2) ?: "0"
+            val tot = partes.getOrNull(3) ?: "0"
+
+            val fecha = java.text.SimpleDateFormat("dd-MM-yyyy HH:mm")
+                .format(java.util.Date(fechaMs))
+
+            Text("• $fecha — $cant item(s) — Subtotal $sub — Total $tot")
         }
     }
 }

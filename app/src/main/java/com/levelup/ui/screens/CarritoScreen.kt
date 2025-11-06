@@ -62,11 +62,17 @@ fun CarritoScreen(onBack: () -> Unit) {
                     color = MaterialTheme.colorScheme.secondary
                 )
 
-                Button(onClick = { vm.limpiarCarrito() }) {
-                    Text(
-                        text = "Vaciar carrito",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Button(onClick = { vm.limpiarCarrito() }) {
+                        Text("Vaciar carrito")
+                    }
+
+                    Button(
+                        onClick = { vm.pagarYGuardarOrden() },
+                        enabled = ids.isNotEmpty()
+                    ) {
+                        Text("Pagar")
+                    }
                 }
             }
         }

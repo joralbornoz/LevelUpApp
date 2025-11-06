@@ -28,6 +28,8 @@ class AppViewModel(app: Application): AndroidViewModel(app) {
         .map { it.isNotBlank() }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
+    val ordenesCsv = datos.ordenesCsv.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), "")
+
     init {
         viewModelScope.launch {
             datos.carritoIds.collect { csv ->
@@ -37,9 +39,9 @@ class AppViewModel(app: Application): AndroidViewModel(app) {
         }
     }
 
-    fun addToCart(id: Long) { _carrito.value = _carrito.value + id; persistCart() }
-    fun limpiarCarrito() { _carrito.value = emptyList(); persistCart() }
-    private fun persistCart() = viewModelScope.launch {
+    fun agregarEnCarrito(id: Long) { _carrito.value = _carrito.value + id; persistCarrito() }
+    fun limpiarCarrito() { _carrito.value = emptyList(); persistCarrito() }
+    private fun persistCarrito() = viewModelScope.launch {
         datos.guardarCarrito(_carrito.value.joinToString(","))
     }
 
@@ -50,7 +52,6 @@ class AppViewModel(app: Application): AndroidViewModel(app) {
         datos.guardarUsuario(nombre, email, direccion)
     }
 
-    // 👇 Logout (borra usuario y carrito)
     fun logout() = viewModelScope.launch {
         datos.guardarUsuario("", "")
         datos.guardarCarrito("")
@@ -60,4 +61,16 @@ class AppViewModel(app: Application): AndroidViewModel(app) {
     fun total(): Int = _carrito.value.sumOf { id ->
         DataProductos.firstOrNull { it.id == id }?.precio ?: 0
     }
+    fun pagarYGuardarOrden() = viewModelScope.launch {
+        val subtotal = total()
+        val totalIva = (subtotal * 1.19).toInt()
+        val cantidad = _carrito.value.size
+        val fecha = System.currentTimeMillis()
+
+        val linea = "$fecha;$cantidad;$subtotal;$totalIva"
+
+        datos.agregarOrden(linea)
+        limpiarCarrito()
+    }
+
 }

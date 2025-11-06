@@ -33,7 +33,10 @@ fun ProductosScreen(onBack: () -> Unit, onNavigate: (String) -> Unit) {
         }
     ) { inner ->
         Column(
-            Modifier.fillMaxSize().padding(inner).padding(16.dp),
+            Modifier
+                .fillMaxSize()
+                .padding(inner)
+                .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Button(onClick = { onNavigate(NavRoutes.Carrito) }) {
@@ -55,7 +58,7 @@ fun ProductosScreen(onBack: () -> Unit, onNavigate: (String) -> Unit) {
                                 style = MaterialTheme.typography.bodyLarge)
                             Text(
                                 p.descripcion, style = MaterialTheme.typography.bodyMedium)
-                            Button(onClick = { vm.addToCart(p.id) }, modifier = Modifier.padding(top = 8.dp)) {
+                            Button(onClick = { vm.agregarEnCarrito(p.id) }, modifier = Modifier.padding(top = 8.dp)) {
                                 Text("Agregar")
                             }
                         }
