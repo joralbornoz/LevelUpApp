@@ -46,40 +46,7 @@ Incluye pantallas conectadas por navegación y almacenamiento local de datos del
 
 ## 📂 Estructura del Proyecto
 
-com.levelup/
-├── data/
-│ ├── DatosUsuario.kt
-│ ├── Productos.kt
-│ └── Sucursales.kt
-│
-├── ui/
-│ ├── components/
-│ │ ├── BotonMenu.kt 
-│ │ └── SucursalCard.kt
-│ │
-│ ├── navigation/
-│ │ ├── AppNav.kt
-│ │ └── NavRoutes.kt
-│ │
-│ ├── screens/
-│ │ ├── CarritoScreen.kt
-│ │ ├── LoginScreen.kt
-│ │ ├── MenuScreen.kt
-│ │ ├── PerfilScreen.kt
-│ │ ├── ProductosScreen.kt
-│ │ └── SucursalesScreen.kt
-│ │
-│ ├── theme/
-│ │ ├── Color.kt
-│ │ ├── Shape.kt
-│ │ ├── Theme.kt
-│ │ └── Type.kt 
-│
-├── viewmodel/
-│ └── AppViewModel.kt
-│
-└── MainActivity.kt
-
+<img width="355" height="745" alt="image" src="https://github.com/user-attachments/assets/8e24d1dc-5f86-4026-ae95-1d0a4e3eb74b" />
 
 ---
 
