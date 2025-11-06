@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.levelup.ui.viewmodel.AppViewModel
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -16,6 +17,7 @@ fun LoginScreen(onBack: () -> Unit, onLoginSuccess: () -> Unit) {
     var usuario by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var pass by remember { mutableStateOf("") }
+    var direccion by remember { mutableStateOf("") }
     var error by remember { mutableStateOf<String?>(null) }
 
     Scaffold(topBar = {
@@ -29,9 +31,25 @@ fun LoginScreen(onBack: () -> Unit, onLoginSuccess: () -> Unit) {
                 .padding(30.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            OutlinedTextField(value = usuario, onValueChange = { usuario = it }, label = { Text("Nombre Usuario") }, singleLine = true)
-            OutlinedTextField(value = email, onValueChange = { email = it }, label = { Text("Email") }, singleLine = true)
-            OutlinedTextField(value = pass, onValueChange = { pass = it }, label = { Text("Contraseña") }, singleLine = true)
+            OutlinedTextField(
+                value = usuario,
+                onValueChange = { usuario = it },
+                label = { Text("Nombre Usuario") },
+                singleLine = true
+            )
+            OutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("Email") },
+                singleLine = true
+            )
+            OutlinedTextField(
+                value = pass,
+                onValueChange = { pass = it },
+                label = { Text("Contraseña") },
+                singleLine = true,
+                visualTransformation = PasswordVisualTransformation()
+            )
 
             Button(onClick = {
                 error = when {
@@ -41,7 +59,7 @@ fun LoginScreen(onBack: () -> Unit, onLoginSuccess: () -> Unit) {
                     else -> null
                 }
                 if (error == null) {
-                    vm.guardarPerfil(usuario, email)
+                    vm.guardarPerfil(usuario, email, direccion)
                     onLoginSuccess()
                 }
             }) { Text("Ingresar") }

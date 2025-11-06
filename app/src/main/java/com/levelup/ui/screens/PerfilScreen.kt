@@ -37,8 +37,11 @@ fun ProfileScreen(onBack: () -> Unit) {
             navigationIcon = { IconButton(onClick = onBack){ Icon(Icons.Default.ArrowBack, "Volver") } }
         )
     }) { inner ->
-        Column(Modifier.padding(inner).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            photo?.let { Image(it.asImageBitmap(), contentDescription = null, modifier = Modifier.size(120.dp)) }
+        Column(Modifier.padding(inner).padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            photo?.let { Image(it.asImageBitmap(),
+                contentDescription = null,
+                modifier = Modifier.size(120.dp)) }
             Button(onClick = { cameraLauncher.launch(null) }) { Text("Tomar foto") }
 
             OutlinedTextField(

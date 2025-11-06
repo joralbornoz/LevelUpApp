@@ -1,6 +1,6 @@
 package com.levelup.ui.screens
 
-import androidx.compose.animation.Crossfade
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -43,10 +43,18 @@ fun ProductosScreen(onBack: () -> Unit, onNavigate: (String) -> Unit) {
             LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 items(DataProductos) { p ->
                     Card(Modifier.fillMaxWidth()) {
-                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                            Text(p.nombre, style = MaterialTheme.typography.titleLarge)
-                            Text("CLP ${p.precio}", style = MaterialTheme.typography.bodyLarge)
-                            Text(p.descripcion, style = MaterialTheme.typography.bodyMedium)
+                        Column(
+                            Modifier.padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(
+                                p.nombre,
+                                style = MaterialTheme.typography.titleLarge)
+                            Text(
+                                "CLP ${p.precio}",
+                                style = MaterialTheme.typography.bodyLarge)
+                            Text(
+                                p.descripcion, style = MaterialTheme.typography.bodyMedium)
                             Button(onClick = { vm.addToCart(p.id) }, modifier = Modifier.padding(top = 8.dp)) {
                                 Text("Agregar")
                             }

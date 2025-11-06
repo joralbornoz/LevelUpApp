@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("org.jetbrains.kotlin.plugin.compose") version "2.0.21" // o tu versión de Kotlin
+    id("org.jetbrains.kotlin.plugin.compose") version "2.0.21"
 }
 
 android {
@@ -75,25 +75,21 @@ dependencies {
 
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-
     implementation("androidx.compose.ui:ui-text-google-fonts:1.7.0")
 
-    // Compose
     implementation(platform("androidx.compose:compose-bom:2025.08.00"))
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")
 
-    // Activity + Navigation
+
     implementation("androidx.activity:activity-compose:1.11.0")
     implementation("androidx.navigation:navigation-compose:2.9.2")
 
-    // Lifecycle / ViewModel
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.4")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
 
-    // DataStore (almacenamiento local simple)
     implementation("androidx.datastore:datastore-preferences:1.1.1")
     implementation("androidx.compose.material:material-icons-extended")
 }

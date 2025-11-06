@@ -47,6 +47,7 @@ fun MenuScreen(onNavigate: (String) -> Unit) {
             ) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
+
                         "Bienvenido, $name ",
                         style = MaterialTheme.typography.titleLarge,
                         color = SecondaryBlue
