@@ -19,7 +19,8 @@ import androidx.compose.material.icons.filled.ArrowBack
 @Composable
 fun ProductosScreen(onBack: () -> Unit, onNavigate: (String) -> Unit) {
     val vm: AppViewModel = viewModel()
-    val cartSize by vm.cart.collectAsState()
+    val carrito by vm.carrito.collectAsState()
+    val cantidad = carrito.size
 
     Scaffold(
         topBar = {
@@ -35,10 +36,8 @@ fun ProductosScreen(onBack: () -> Unit, onNavigate: (String) -> Unit) {
             Modifier.fillMaxSize().padding(inner).padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Crossfade(targetState = cartSize, label = "carrito") { count ->
-                Button(onClick = { onNavigate(NavRoutes.Carrito) }) {
-                    Text("Ir al carrito ($count)")
-                }
+            Button(onClick = { onNavigate(NavRoutes.Carrito) }) {
+                Text("Ir al carrito ($cantidad)")
             }
 
             LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {

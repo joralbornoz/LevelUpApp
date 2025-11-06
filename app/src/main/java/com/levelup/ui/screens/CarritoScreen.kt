@@ -16,7 +16,7 @@ import androidx.compose.material3.Divider
 @Composable
 fun CarritoScreen(onBack: () -> Unit) {
     val vm: AppViewModel = viewModel()
-    val ids by vm.cart.collectAsState()
+    val ids by vm.carrito.collectAsState()
 
     Scaffold(
         topBar = {
@@ -62,7 +62,7 @@ fun CarritoScreen(onBack: () -> Unit) {
                     color = MaterialTheme.colorScheme.secondary
                 )
 
-                Button(onClick = { vm.clearCart() }) {
+                Button(onClick = { vm.limpiarCarrito() }) {
                     Text(
                         text = "Vaciar carrito",
                         style = MaterialTheme.typography.bodyLarge
