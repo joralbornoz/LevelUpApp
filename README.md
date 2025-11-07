@@ -51,7 +51,7 @@ Incluye pantallas conectadas por navegación y almacenamiento local de datos del
 ---
 
 💻 1. Clonar el repositorio
-git clone https://github.com/tuusuario/LevelUpApp.git
+git clone https://github.com/joralbornoz/LevelUpApp.git
 cd LevelUpApp
 
 🧩 2. Abrir en Android Studio
