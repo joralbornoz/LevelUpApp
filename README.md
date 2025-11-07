@@ -23,12 +23,19 @@ Incluye pantallas conectadas por navegación y almacenamiento local de datos del
 
 ## 🚀 Funcionalidades Principales
 
-| 🔐 **Login validado** | Acceso con validación de datos. |
-| 🏠 **Menú principal** | Navegación entre todas las secciones. |
-| 🛒 **Gestión de carrito** | Agrega, limpia y calcula el total + IVA. |
-| 🧍‍♂️ **Perfil de usuario** | Guarda nombre, email y dirección con DataStore. |
-| 🏬 **Sucursales** | Muestra dirección, teléfono y acceso a mapa y llamada. |
-| 🎨 **Diseño Material 3** | Interfaz oscura con colores personalizados (verde neón). |
+🔐 Login validado	Acceso con validación de datos.
+
+🏠 Menú principal	Navegación entre todas las secciones.
+
+🕹️ Gestión de productos	Muestra catálogo con nombre, precio y descripción, permitiendo agregar al carrito.
+
+🛒 Gestión de carrito	Agrega, limpia y calcula el total + IVA.
+
+🧍‍♂️ Perfil de usuario	Guarda nombre, email y dirección con persistencia local (DataStore).
+
+🏬 Sucursales	Muestra dirección, teléfono y acceso nativo a mapa y llamada.
+
+🎨 Diseño Material 3	Interfaz moderna con tema oscuro y acentos en verde neón.
 
 ---
 
