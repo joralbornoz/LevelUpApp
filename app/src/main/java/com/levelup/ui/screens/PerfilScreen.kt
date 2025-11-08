@@ -30,7 +30,9 @@ fun ProfileScreen(onBack: () -> Unit) {
     var editarDireccion by remember(direccionUsuario) { mutableStateOf(direccionUsuario) }
     var photo by remember { mutableStateOf<Bitmap?>(null) }
 
-    val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicturePreview()) { bmp ->
+    val cameraLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.TakePicturePreview())
+    { bmp ->
         photo = bmp
     }
 
@@ -51,7 +53,7 @@ fun ProfileScreen(onBack: () -> Unit) {
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // --- FOTO DE PERFIL ---
+
             photo?.let {
                 Image(
                     it.asImageBitmap(),
